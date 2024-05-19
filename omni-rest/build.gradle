@@ -1,0 +1,21 @@
+plugins {
+    id 'org.springframework.boot' version "${spring}"
+    id 'org.openapi.generator' version "${openApi}"
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    compileOnly "org.openapitools:openapi-generator:${openApi}"
+
+
+}
+
+test {
+    useJUnitPlatform()
+}
+
+openApiGenerate {
+    inputSpec.set("$rootDir/omni-rest/src/main/resources/apispec.yaml")
+    generatorName = "spring"
+}

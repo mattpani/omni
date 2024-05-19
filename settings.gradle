@@ -1,0 +1,26 @@
+pluginManagement{
+    plugins{
+        id 'java'
+        id 'org.springframework.boot' version "${spring}"
+    }
+
+
+    repositories {
+        maven { url "https://plugins.gradle.org/m2/" }
+        gradlePluginPortal()
+        mavenCentral()
+    }
+}
+
+
+
+rootProject.name = 'omni'
+
+rootProject.children.each { subproject ->
+    subproject.buildFileName = "build.gradle"
+}
+include 'omni-rest'
+include 'omni-core'
+include 'omni-test-support'
+include 'omni-persistence'
+
