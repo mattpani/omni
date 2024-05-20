@@ -3,11 +3,10 @@ plugins {
 }
 
 dependencies {
-    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation platform("org.junit:junit-bom:${junitBom}")
     testImplementation 'org.junit.jupiter:junit-jupiter'
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-jdbc', version: jdbcV
     implementation group: 'org.projectlombok', name: 'lombok', version: lombookV
-
 }
 
 test {

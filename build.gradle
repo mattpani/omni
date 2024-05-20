@@ -3,8 +3,6 @@ plugins {
     id 'io.spring.dependency-management' version "${springDepMan}"
 }
 
-
-
 subprojects {
     group = 'sk.matt'
     version = '1.0-SNAPSHOT'
@@ -30,19 +28,10 @@ subprojects {
         testImplementation("org.springframework.boot:spring-boot-starter-test")
         testRuntimeOnly("org.junit.platform:junit-platform-launcher")
         implementation("org.postgresql:postgresql:${postgre}")
-        implementation 'org.springframework:spring-web:6.1.7'
-        implementation 'javax.annotation:javax.annotation-api:1.3.2'
-        implementation 'javax.validation:validation-api:2.0.1.Final'
-        compileOnly 'javax.servlet:javax.servlet-api:4.0.1'
-
-
-
-
     }
 
     test {
         useJUnitPlatform()
     }
-
 
 }
