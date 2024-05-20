@@ -7,8 +7,9 @@ dependencies {
     testImplementation platform("org.junit:junit-bom:${junitBom}")
     testImplementation 'org.junit.jupiter:junit-jupiter'
     compileOnly "org.openapitools:openapi-generator:${openApi}"
-
-
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-jdbc', version: jdbcV
+    implementation("org.flywaydb:flyway-core")
+    runtimeOnly("org.postgresql:postgresql")
 }
 
 test {
