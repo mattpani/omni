@@ -24,8 +24,7 @@ CREATE TABLE Contact (
 -- Create the Organization table
 CREATE TABLE Organization (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(100),
-    contact_id INT
+    name VARCHAR(100)
 );
 
 -- Create the OrganizationPerson relation many to many
@@ -34,11 +33,6 @@ CREATE TABLE Organization_person (
     person_id INT,
     PRIMARY KEY (organization_id, person_id)
 );
-
--- Adding constraint to Organization
-ALTER TABLE Organization
-ADD CONSTRAINT fk_organization_contact
-FOREIGN KEY (contact_id) REFERENCES Contact(id);
 
 -- Adding constraint to Contact
 ALTER TABLE Contact
