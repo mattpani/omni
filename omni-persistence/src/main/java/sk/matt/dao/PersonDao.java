@@ -12,4 +12,6 @@ public interface  PersonDao {
     Person findPersonById(Long id);
 
     void deletePersonById(Long id);
+
+    List<Person> getPersonByFullName(Person person);
 }

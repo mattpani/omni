@@ -2,6 +2,7 @@ package sk.matt.dao.impl;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import sk.matt.dao.ContactDao;
 import sk.matt.entity.Contact;
@@ -10,6 +11,7 @@ import sk.matt.repository.ContactRepository;
 import java.util.List;
 
 @Service
+@Qualifier("primaryContactDao")
 public class ContactDaoImpl implements ContactDao {
 
     private final ContactRepository contactRepository;

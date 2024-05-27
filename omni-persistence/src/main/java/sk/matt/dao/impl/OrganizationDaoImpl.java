@@ -2,14 +2,17 @@ package sk.matt.dao.impl;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import sk.matt.dao.OrganizationDao;
 import sk.matt.entity.Organization;
+import sk.matt.entity.Person;
 import sk.matt.repository.OrganizationRepository;
 
 import java.util.List;
 
 @Service
+@Qualifier("primaryOrganizationDao")
 public class OrganizationDaoImpl implements OrganizationDao {
 
     private final OrganizationRepository organizationRepository;
@@ -47,6 +50,11 @@ public class OrganizationDaoImpl implements OrganizationDao {
             throw new IllegalArgumentException("ID cannot be null");
         }
         organizationRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Organization> getOrganizationByName(String name) {
+        return organizationRepository.getOrganizationByName(name);
     }
 
 }

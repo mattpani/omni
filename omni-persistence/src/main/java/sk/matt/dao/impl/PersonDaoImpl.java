@@ -1,6 +1,7 @@
 package sk.matt.dao.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import sk.matt.dao.PersonDao;
 import sk.matt.entity.Person;
@@ -8,6 +9,7 @@ import sk.matt.repository.PersonRepository;
 
 import java.util.List;
 @Service
+@Qualifier("primaryPersonDao")
 public class PersonDaoImpl implements PersonDao {
 
     private final PersonRepository personRepository;
@@ -47,5 +49,12 @@ public class PersonDaoImpl implements PersonDao {
         personRepository.deleteById(id);
     }
 
+    @Override
+    public List<Person> getPersonByFullName(Person person) {
+        if (person.getFirstName() == null || person.getLastName() == null) {
+            throw new IllegalArgumentException("Name iis");
+        }
+        return personRepository.findPersonByFullName(person.getFirstName(), person.getLastName());
+    }
 
 }
