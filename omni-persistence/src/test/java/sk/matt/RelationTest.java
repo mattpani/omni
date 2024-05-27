@@ -3,7 +3,10 @@ package sk.matt;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.context.annotation.ComponentScan;
 import sk.matt.dao.impl.OrganizationDaoImpl;
 import sk.matt.dao.impl.PersonDaoImpl;
 import sk.matt.entity.Contact;
@@ -40,10 +43,11 @@ public class RelationTest {
         contOrg.setAddress("123 Test Org");
 
         org.setContact(contOrg);
-
         assertNotNull(organizationService.saveOrganization(org));
 
-        assertNotNull(savedPerson);
+
+        org.addPeople(person);
+        assertNotNull(organizationService.saveOrganization(org));
         assertEquals(person, savedPerson);
     }
 
