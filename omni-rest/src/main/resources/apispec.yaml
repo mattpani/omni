@@ -1,0 +1,209 @@
+openapi: 3.0.0
+info:
+  title: Sample API
+  version: 1.0.0
+paths:
+  /persons:
+    get:
+      summary: Get all persons
+      responses:
+        '200':
+          description: A list of persons
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PersonData'
+    post:
+      summary: Create a person
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PersonData'
+      responses:
+        '201':
+          description: Created person
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonData'
+  /persons/{id}:
+    get:
+      summary: Get a person by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: A person was found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonData'
+        '404':
+          description: Person not found
+    put:
+      summary: Update a person by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PersonData'
+      responses:
+        '200':
+          description: Updated person successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonData'
+        '404':
+          description: Person not found
+    delete:
+      summary: Delete a person by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Deleted person successfully
+        '404':
+          description: Person not found
+  /organizations:
+    get:
+      summary: Get all organizations
+      responses:
+        '200':
+          description: A list of organizations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrganizationData'
+    post:
+      summary: Create an organization
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrganizationData'
+      responses:
+        '201':
+          description: Created organization successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationData'
+  /organizations/{id}:
+    get:
+      summary: Get an organization by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: An organization
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationData'
+        '404':
+          description: Organization not found
+    put:
+      summary: Update an organization by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrganizationData'
+      responses:
+        '200':
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationData'
+        '404':
+          description: Organization not found
+    delete:
+      summary: Delete an organization by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Deleted
+        '404':
+          description: Organization not found
+components:
+  schemas:
+    PersonData:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        firstName:
+          type: string
+        lastName:
+          type: string
+        dateOfBirth:
+          type: string
+          format: date
+        contacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContactData'
+    ContactData:
+      type: object
+      properties:
+        phoneNumber:
+          type: string
+        email:
+          type: string
+        address:
+          type: string
+    OrganizationData:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        contact:
+          $ref: '#/components/schemas/ContactData'
+        person:
+          type: array
+          items:
+            $ref: '#/components/schemas/PersonData'
