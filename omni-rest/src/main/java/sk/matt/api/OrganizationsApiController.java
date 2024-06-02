@@ -1,11 +1,14 @@
 package sk.matt.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.NativeWebRequest;
 import sk.matt.model.OrganizationData;
+import sk.matt.model.mapper.OrganizationMapperImpl;
+import sk.matt.services.OrganizationService;
 
 import javax.annotation.Generated;
 import java.util.List;
@@ -16,10 +19,13 @@ import java.util.Optional;
 @RequestMapping("${openapi.sample.base-path:}")
 public class OrganizationsApiController implements OrganizationsApi {
 
+
+    private final OrganizationService primaryOrganizationServiceImpl;
     private final NativeWebRequest request;
 
     @Autowired
-    public OrganizationsApiController(NativeWebRequest request) {
+    public OrganizationsApiController(OrganizationService primaryOrganizationServiceImpl, NativeWebRequest request) {
+        this.primaryOrganizationServiceImpl = primaryOrganizationServiceImpl;
         this.request = request;
     }
 
@@ -30,7 +36,8 @@ public class OrganizationsApiController implements OrganizationsApi {
 
     @Override
     public ResponseEntity<List<OrganizationData>> organizationsGet() {
-        return OrganizationsApi.super.organizationsGet();
+        OrganizationMapperImpl orgMapper = new OrganizationMapperImpl();
+        return new ResponseEntity<>(orgMapper.dataToOrganizationList(primaryOrganizationServiceImpl.getAllOrganizations()),HttpStatus.FOUND);
     }
 
     @Override
