@@ -34,4 +34,10 @@ subprojects {
         useJUnitPlatform()
     }
 
+    jar {
+        enabled = true
+    }
+    springBoot {
+        mainClass = 'omni-rest.src.main.java.sk.matt.RestApplication'
+    }
 }

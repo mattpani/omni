@@ -10,3 +10,7 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+springBoot {
+    mainClass = 'omni-rest.src.main.java.sk.matt.RestApplication'
+}
