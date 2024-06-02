@@ -1,0 +1,19 @@
+{
+	"info": {
+		"_postman_id": "8218493c-145a-4712-aed1-53d3e89b9972",
+		"name": "Person",
+		"description": "Perosn collection to test Person api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "35952225"
+	},
+	"item": [
+		{
+			"name": "CreatePerson",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
